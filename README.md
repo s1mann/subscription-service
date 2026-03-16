@@ -13,6 +13,7 @@ docker-compose -p subapp up
 - PUT /subscriptions/{id} — обновить
 - DELETE /subscriptions/{id} — удалить
 - GET /calc?from=01-2025&to=12-2025&user=&name= — подсчёт стоимости
+
 Пример запроса
 curl -X POST http://localhost:8080/subscriptions \
   -H "Content-Type: application/json" \
