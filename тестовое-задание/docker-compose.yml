@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: sub-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: subscriptions
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: subs-app
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: 0896
+      DB_NAME: subscriptions
+      PORT: 8080
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

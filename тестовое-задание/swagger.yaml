@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: Subscription API
+  version: 1.0.0
+paths:
+  /subscriptions:
+    post:
+      summary: Создать подписку
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service_name:
+                  type: string
+                price:
+                  type: integer
+                user_id:
+                  type: string
+                start_date:
+                  type: string
+                end_date:
+                  type: string
+      responses:
+        '201':
+          description: Создано
+    get:
+      summary: Список подписок
+      responses:
+        '200':
+          description: OK
+  /subscriptions/{id}:
+    get:
+      summary: Получить подписку
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+    put:
+      summary: Обновить подписку
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service_name:
+                  type: string
+                price:
+                  type: integer
+                user_id:
+                  type: string
+                start_date:
+                  type: string
+                end_date:
+                  type: string
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Удалить подписку
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Удалено
+  /api/aggregate:
+    get:
+      summary: Стоимость за период
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: query
+          schema:
+            type: string
+        - name: service_name
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
